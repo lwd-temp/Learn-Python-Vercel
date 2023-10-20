@@ -43,7 +43,7 @@ print("Hello world!")
         runFunction: function () {
           runBtn.enable(false);
           runBtn.name("Please wait...");
-          var code = document.getElementById("editor").value;
+          var code = editor.getValue();
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "/exec", true);
           xhr.send(code);
@@ -51,17 +51,11 @@ print("Hello world!")
             if (xhr.status === 200) {
               runBtn.enable(true);
               runBtn.name("Run");
-              document.getElementById("editor").value =
-                document.getElementById("editor").value +
-                "\n" +
-                xhr.responseText;
+              editor.insert("\n" + xhr.responseText);
             } else {
               runBtn.enable(true);
               runBtn.name("Run");
-              document.getElementById("editor").value =
-                document.getElementById("editor").value +
-                "\n" +
-                xhr.responseText;
+              editor.insert("\n" + xhr.responseText);
             }
           };
         },
